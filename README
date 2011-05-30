@@ -21,6 +21,10 @@ Put your soduku square in the test.sdk file and go
 
 The sample above is taken from http://projecteuler.net/index.php?section=problems&id=96
 
-Some "hard" problems are found on http://en.wikipedia.org/wiki/Algorithmics_of_sudoku
+Some "hard" problems are found on http://en.wikipedia.org/wiki/Algorithmics_of_sudoku. 
+The sudoku problem in test.sdk is from there under the label "golden nugget"
 
 I used http://www.sudoku-solutions.com/ to find and check solutions too
+
+The solver is efficient in the places that count and solves "hard" sudoku puzzles in no 
+more than 60 secs. It could probably be made faster still, but it seems unlikely to be much use.

@@ -1,10 +1,12 @@
-﻿// Learn more about F# at http://fsharp.net
-
-// We set up a 9x9 array. Each element contains a list of numbers. If there is only a single number we know that is the one
+﻿// We set up a 9x9 array. Each element contains a list of numbers. If there is only a single number we know that is the one
 // for that element. If there are several numbers those represent the options known to be possible at that place. If there
 // are no numbers in a given square we know the setup to be impossible.
+// Plan is:
+// - Read in the test.sdk and stick in a 9x9 array
+// - Elminate the obviously impossible, guess when that strategu runs out
+// The interesting parts are in findsolution where we set up the depth-first search. 
+// The rest of the file is just straightforward implementation of the sudoku game mechanics
 
-// TODO: IF the sudoku isn't straightforward do a check to try random stuff
 open System
 open System.IO
 open System.Text
@@ -25,7 +27,6 @@ let numbers = longline.ToCharArray() |> Array.map(fun x ->
                                                     let ci = Int32.Parse(x.ToString())
                                                     if ci = 0 then sdkelt.Options [ 1 .. 9 ]
                                                     else sdkelt.Certain ci
-
                                                    )
 
 // We keep our stuff in this. Doing a 2D array was a bad idea
