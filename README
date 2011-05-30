@@ -1,0 +1,26 @@
+﻿Program to solve Sudoku Puzzles written in F#
+
+Input is a file like this
+003020600
+900305001
+001806400
+008102900
+700000008
+006708200
+002609500
+800203009
+005010300
+
+where 0 means the square is open. (Used on Project Euler)
+
+Or 
+..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..
+where . means the square is open. this is what is most commonly used.
+
+Put your soduku square in the test.sdk file and go
+
+The sample above is taken from http://projecteuler.net/index.php?section=problems&id=96
+
+Some "hard" problems are found on http://en.wikipedia.org/wiki/Algorithmics_of_sudoku
+
+I used http://www.sudoku-solutions.com/ to find and check solutions too
