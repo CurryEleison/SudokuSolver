@@ -42,6 +42,9 @@
     <None Include="test.sdk" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FSharp.PowerPack.Parallel.Seq">
+      <HintPath>..\..\..\..\..\Documents\Visual Studio 2010\Projects\SudokuSolver\SudokuSolver\ExtraDlls\FSharp.PowerPack.Parallel.Seq.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core" />
     <Reference Include="System" />

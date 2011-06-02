@@ -10,6 +10,7 @@
 open System
 open System.IO
 open System.Text
+open Microsoft.FSharp.Collections
 
 type sdkelt =
      | Certain of int32
@@ -128,13 +129,13 @@ let issolved  (arr:sdkelt[,]) =
 let findsolution (arr:sdkelt[,]) =
     let f (arr:sdkelt[,]) i j =
         let s = match arr.[i,j] with 
-                | Options opt -> opt  |> List.map(fun x -> 
+                | Options opt ->  opt |> List.toSeq |> PSeq.map(fun x -> 
                                     let cp = arr |> Array2D.copy
                                     cp.[i, j] <- sdkelt.Certain x
                                     eleminateimpossibles cp)
-                | Certain x -> [ arr ]
-                | Nothing -> []
-        s |> List.filter(fun a -> not (iscontradiction a))
+                | Certain x -> [ arr ] |> List.toSeq |> PSeq.map(fun x -> x)
+                | Nothing -> [] |> List.toSeq |> PSeq.map(fun x -> x)
+        s |> PSeq.filter(fun a -> not (iscontradiction a))
     let rec g (se:seq<sdkelt[,]>) =
         seq {
             for x in se do
