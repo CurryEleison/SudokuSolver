@@ -133,8 +133,8 @@ let findsolution (arr:sdkelt[,]) =
                                     let cp = arr |> Array2D.copy
                                     cp.[i, j] <- sdkelt.Certain x
                                     eleminateimpossibles cp)
-                | Certain x -> [ arr ] |> List.toSeq |> PSeq.map(fun x -> x)
-                | Nothing -> [] |> List.toSeq |> PSeq.map(fun x -> x)
+                | Certain x -> [ arr ]  |> PSeq.map(fun x -> x)
+                | Nothing -> [] |> PSeq.map(fun x -> x)
         s |> PSeq.filter(fun a -> not (iscontradiction a))
     let rec g (se:seq<sdkelt[,]>) =
         seq {
@@ -153,18 +153,24 @@ let findsolution (arr:sdkelt[,]) =
 // I use http://www.sudoku-solutions.com/ to check the results
 let converttostring (arr:sdkelt[,]) =
     let s:StringBuilder = StringBuilder()
-    arr |> Array2D.iter(fun x -> printf "%A" (match  x with 
-                                                | Certain i -> i
-                                                | Options opt -> opt.Head
-                                                | Nothing -> 0
-                                                ))
-    ""
+    arr |> Array2D.iter(fun x -> Printf.bprintf s "%s" (match  x with 
+                                                        | Certain i -> i.ToString()
+                                                        | Options opt -> "."
+                                                        | Nothing -> "-"
+                                                        ))
+    s.ToString()
+
+    
 
 // All set up. Let's go find a solution then
 printfn "--"
-(findsolution elems) |> Seq.iter (fun x -> printfn "%A" (converttostring x)) 
+let timer = new System.Diagnostics.Stopwatch()
+timer.Start()
+(findsolution elems) |> Seq.iter (fun x -> printfn "%s" (converttostring x)) 
+timer.Stop()
+printfn "%A" timer.ElapsedMilliseconds
 //printfn "--"
 //(findsolution (eleminateimpossibles elems)) |> Seq.iter (fun x -> printfn "%A" x) 
 
 //Pause with the solution on screen
-Console.ReadLine()
+ignore (Console.ReadLine())
